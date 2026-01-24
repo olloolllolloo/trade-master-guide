@@ -13,7 +13,6 @@
       --accent: #5D8BF4;
       --green: #4CAF50;
       --gold-light: #fff8e1;
-      --gold: #ffd54f;
       --text: #222;
       --path-color: #666;
       --bg: #f0e6ff;
@@ -148,18 +147,6 @@
       overflow: hidden;
       color: var(--text);
     }
-    .pro-plan::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .pro-plan > * {
-      position: relative;
-      z-index: 1;
-    }
     .pro-header {
       font-size: 1.3rem;
       font-weight: 700;
@@ -211,7 +198,7 @@
 </head>
 <body>
 
-  <!-- Компактная панель вместо большой шапки -->
+  <!-- Компактная панель -->
   <div class="top-nav">
     <a href="#о-нас">О нас</a>
     <a href="#объявления-о-трейдах">Трейды</a>
@@ -341,7 +328,7 @@
       <p>Выберите тариф, который подходит именно Вам:</p>
 
       <div class="pro-table">
-        <div class="pro-plan pro-pro">
+        <div class="pro-plan pro-pro" id="pro-plan-1">
           <div class="pro-header">PRO</div>
           <ul class="pro-list">
             <li>Нет рекламы</li>
@@ -355,7 +342,7 @@
           <div class="pro-price">849₽ / год</div>
         </div>
 
-        <div class="pro-plan pro-pro-plus">
+        <div class="pro-plan pro-pro-plus" id="pro-plan-2">
           <div class="pro-header">PRO+</div>
           <ul class="pro-list">
             <li>Нет рекламы</li>
@@ -391,6 +378,56 @@
   <footer>
     <p>© 2026 <span class="brand">Trade Master</span> — сделки, которым можно доверять.</p>
   </footer>
+
+  <!-- СНЕЖИНКИ -->
+  <script>
+    function createSnowflakes(container, count, baseDuration, maxSize, opacity) {
+      container.style.position = 'relative';
+      container.style.overflow = 'hidden';
+
+      const snowContainer = document.createElement('div');
+      snowContainer.style.position = 'absolute';
+      snowContainer.style.top = '0';
+      snowContainer.style.left = '0';
+      snowContainer.style.width = '100%';
+      snowContainer.style.height = '100%';
+      snowContainer.style.pointerEvents = 'none';
+      snowContainer.style.zIndex = '0';
+      container.appendChild(snowContainer);
+
+      for (let i = 0; i < count; i++) {
+        const size = Math.random() * maxSize + 2;
+        const flake = document.createElement('div');
+        flake.style.position = 'absolute';
+        flake.style.width = size + 'px';
+        flake.style.height = size + 'px';
+        flake.style.backgroundColor = 'rgba(255, 213, 79, ' + opacity + ')';
+        flake.style.borderRadius = '50%';
+        flake.style.left = Math.random() * 100 + '%';
+        flake.style.top = '-20px';
+
+        const anim = flake.animate([
+          { transform: 'translateY(0) translateX(0)' },
+          { transform: `translateY(${container.clientHeight + 30}px) translateX(${(Math.random() - 0.5) * 40}px)` }
+        ], {
+          duration: (baseDuration + Math.random() * 5) * 1000,
+          iterations: Infinity,
+          easing: 'linear'
+        });
+
+        snowContainer.appendChild(flake);
+      }
+    }
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const pro1 = document.querySelector('.pro-pro');
+        const pro2 = document.querySelector('.pro-pro-plus');
+        if (pro1) createSnowflakes(pro1, 8, 12, 3, 0.5);
+        if (pro2) createSnowflakes(pro2, 12, 8, 4, 0.6);
+      }, 300);
+    });
+  </script>
 
 </body>
 </html>
