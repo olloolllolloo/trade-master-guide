@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Инструкция — Trade Master</title>
+  <title>Инструкция Trade Master — обмен и продажа цифровых товаров</title>
+  <meta name="description" content="Официальная инструкция к боту Trade Master: как создавать трейды, продавать предметы, настроить профиль и купить PRO-подписку. Безопасно, быстро, удобно.">
+  <!-- Emoji favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📘</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -11,12 +14,10 @@
       --green: #4CAF50;
       --gold-light: #fff8e1;
       --gold: #ffd54f;
-      --gold-dark: #ffb300;
       --text: #222;
       --path-color: #666;
       --bg: #f0e6ff;
       --card-bg: #ffffff;
-      --border: #e0d0f0;
     }
     * {
       margin: 0;
@@ -82,7 +83,7 @@
       padding: 1.8rem;
       border-radius: 12px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-      scroll-margin-top: 80px;
+      scroll-margin-top: 80px; /* ← КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ */
     }
     h2 {
       font-size: 1.5rem;
@@ -132,7 +133,7 @@
       font-size: 0.95em;
     }
     .good {
-      color: var(--good-example);
+      color: var(--green);
       background: #f0f9f0;
       padding: 1rem;
       border-radius: 8px;
@@ -142,7 +143,6 @@
       font-size: 0.95em;
     }
 
-    /* PRO Table */
     .pro-table {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -178,20 +178,13 @@
       font-weight: 700;
       margin-bottom: 1.2rem;
       text-align: center;
+      color: #e65100;
     }
     .pro-pro {
       background: linear-gradient(to right, var(--gold-light), #ffffff);
     }
     .pro-pro-plus {
       background: linear-gradient(to right, #ffffff, var(--gold-light));
-    }
-    .pro-pro::before {
-      background: radial-gradient(circle at 10% 20%, rgba(255,213,79,0.05) 0%, transparent 40%),
-                  radial-gradient(circle at 90% 80%, rgba(255,213,79,0.03) 0%, transparent 50%);
-    }
-    .pro-pro-plus::before {
-      background: radial-gradient(circle at 20% 30%, rgba(255,179,0,0.07) 0%, transparent 40%),
-                  radial-gradient(circle at 80% 70%, rgba(255,179,0,0.05) 0%, transparent 50%);
     }
     .pro-list {
       list-style: none;
@@ -231,7 +224,6 @@
 </head>
 <body>
 
-  <!-- Весь контент без изменений -->
   <header>
     <h1>📘 Инструкция к боту <span class="brand">Trade Master</span></h1>
     <p class="subtitle">Быстро. Удобно. Без спама.</p>
@@ -306,7 +298,7 @@
         <span class="path">Меню → Продажи → Найти продажу → Категория того, что Вы ищете → Описание того, что Вы ищете (лучше описывать как можно подробнее для лучшего поиска)</span>
       </p>
 
-      <p><strong>Редакция своих продаж:</strong><br>
+      <p><<strong>Редакция своих продаж:</strong><br>
         <span class="path">Меню → Продажи → Мои продажи</span>
       </p>
 
@@ -366,7 +358,7 @@
 
       <div class="pro-table">
         <div class="pro-plan pro-pro">
-          <div class="pro-header" style="color: #e65100;">PRO</div>
+          <div class="pro-header">PRO</div>
           <ul class="pro-list">
             <li>Нет рекламы</li>
             <li>Ваши объявления сверху*</li>
@@ -380,7 +372,7 @@
         </div>
 
         <div class="pro-plan pro-pro-plus">
-          <div class="pro-header" style="color: #e65100; text-shadow: 0 0 4px rgba(230,81,0,0.3);">PRO+</div>
+          <div class="pro-header">PRO+</div>
           <ul class="pro-list">
             <li>Нет рекламы</li>
             <li>Ваши объявления сверху*</li>
@@ -416,60 +408,5 @@
     <p>© 2026 <span class="brand">Trade Master</span> — сделки, которым можно доверять.</p>
   </footer>
 
-  <!-- ✅ ИСПРАВЛЕННЫЙ СКРИПТ: снежинки видны и падают правильно -->
-  <script>
-    function createSnowflakes(container, count, baseDuration, maxSize, opacity) {
-      // Убеждаемся, что у контейнера есть position: relative
-      container.style.position = 'relative';
-      container.style.overflow = 'hidden';
-
-      const snowContainer = document.createElement('div');
-      snowContainer.style.position = 'absolute';
-      snowContainer.style.top = '0';
-      snowContainer.style.left = '0';
-      snowContainer.style.width = '100%';
-      snowContainer.style.height = '100%';
-      snowContainer.style.pointerEvents = 'none';
-      snowContainer.style.zIndex = '0';
-      container.appendChild(snowContainer);
-
-      for (let i = 0; i < count; i++) {
-        const size = Math.random() * maxSize + 2;
-        const flake = document.createElement('div');
-        flake.style.position = 'absolute';
-        flake.style.width = size + 'px';
-        flake.style.height = size + 'px';
-        flake.style.backgroundColor = 'rgba(255, 213, 79, ' + opacity + ')';
-        flake.style.borderRadius = '50%';
-        flake.style.left = Math.random() * 100 + '%';
-        flake.style.top = '-20px'; // начинаем СВЕРХУ
-
-        // Анимация: падаем на 100% высоты контейнера + немного ниже
-        const animation = flake.animate([
-          { transform: 'translateY(0) translateX(0)' },
-          { transform: `translateY(${container.clientHeight + 30}px) translateX(${(Math.random() - 0.5) * 40}px)` }
-        ], {
-          duration: (baseDuration + Math.random() * 5) * 1000,
-          iterations: Infinity,
-          easing: 'linear'
-        });
-
-        snowContainer.appendChild(flake);
-      }
-    }
-
-    // Запускаем после полной загрузки и рендеринга
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.querySelectorAll('.pro-plan').forEach(plan => {
-          if (plan.classList.contains('pro-pro')) {
-            createSnowflakes(plan, 8, 12, 3, 0.5);
-          } else if (plan.classList.contains('pro-pro-plus')) {
-            createSnowflakes(plan, 12, 8, 4, 0.6);
-          }
-        });
-      }, 100); // небольшая задержка для уверенности
-    });
-  </script>
 </body>
 </html>
