@@ -3,457 +3,1088 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Инструкция Trade Master — обмен и продажа цифровых товаров</title>
+  <title>Trade Master PRO — Лучший бот для трейдов</title>
   <meta name="description" content="Официальная инструкция к боту Trade Master: как создавать трейды, продавать предметы, настроить профиль и купить PRO-подписку. Безопасно, быстро, удобно.">
-  <!-- Emoji favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📘</text></svg>">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --accent: #5D8BF4;
-      --green: #4CAF50;
-      --gold-light: #fff8e1;
-      --text: #222;
-      --path-color: #666;
-      --bg: #f0e6ff;
-      --card-bg: #ffffff;
+      --primary: #7c3aed;
+      --primary-dark: #5b21b6;
+      --secondary: #06b6d4;
+      --accent: #f59e0b;
+      --success: #10b981;
+      --danger: #ef4444;
+      --dark: #1f2937;
+      --light: #f8fafc;
+      --gradient: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
+      --gradient-gold: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      --gradient-pro: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+      --gradient-pro-plus: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+      --radius: 16px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
+    
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+    
     html {
       scroll-behavior: smooth;
+      font-size: 16px;
     }
+    
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      padding-bottom: 3rem;
-      position: relative;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #e2e8f0;
+      line-height: 1.7;
       overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
     }
-
-    /* Компактная навигационная панель */
-    .top-nav {
+    
+    /* Фоновые элементы */
+    .bg-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(124, 58, 237, 0.1);
+      animation: float 20s infinite linear;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0) rotate(0deg); }
+      33% { transform: translateY(-30vh) translateX(10vw) rotate(120deg); }
+      66% { transform: translateY(20vh) translateX(-15vw) rotate(240deg); }
+      100% { transform: translateY(0) translateX(0) rotate(360deg); }
+    }
+    
+    /* Плавающие кнопки */
+    .floating-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 60px;
+      height: 60px;
+      background: var(--gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      box-shadow: var(--shadow-lg);
+      z-index: 1000;
+      cursor: pointer;
+      transition: var(--transition);
+      animation: pulse 2s infinite;
+    }
+    
+    .floating-btn:hover {
+      transform: scale(1.1) rotate(90deg);
+      box-shadow: 0 15px 30px rgba(124, 58, 237, 0.4);
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(124, 58, 237, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
+    }
+    
+    /* Хедер */
+    header {
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(10px);
       position: sticky;
       top: 0;
-      background: white;
-      padding: 0.6rem 1rem;
-      text-align: center;
-      box-shadow: 0 1px 5px rgba(0,0,0,0.08);
-      z-index: 100;
-      font-size: 0.92rem;
+      z-index: 1000;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-    .top-nav a {
-      color: var(--accent);
-      text-decoration: none;
-      margin: 0 0.5rem;
-      font-weight: 600;
-      transition: opacity 0.2s;
+    
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
     }
-    .top-nav a:hover {
-      opacity: 0.8;
-    }
-
-    main {
-      max-width: 800px;
-      margin: 2.5rem auto;
-      padding: 0 1.5rem;
-    }
-    section {
-      margin-bottom: 2.8rem;
-      background: var(--card-bg);
-      padding: 1.8rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-      scroll-margin-top: 80px;
-    }
-    h2 {
-      font-size: 1.5rem;
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Poppins', sans-serif;
       font-weight: 700;
-      margin: 0 0 1.2rem;
-      padding-left: 10px;
-      border-left: 4px solid var(--accent);
+      font-size: 1.8rem;
+      color: white;
+      text-decoration: none;
     }
-    p, ul {
+    
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    
+    /* Навигация */
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    
+    .nav-link {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .nav-link:hover {
+      color: white;
+      background: rgba(124, 58, 237, 0.1);
+    }
+    
+    .nav-link.active {
+      background: var(--gradient);
+      color: white;
+    }
+    
+    /* Главный контейнер */
+    main {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+      position: relative;
+    }
+    
+    /* Герой секция */
+    .hero {
+      text-align: center;
+      margin-bottom: 4rem;
+      padding: 4rem 2rem;
+      background: rgba(30, 41, 59, 0.7);
+      border-radius: var(--radius);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      box-shadow: var(--shadow);
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+      z-index: -1;
+    }
+    
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
       margin-bottom: 1rem;
-      color: var(--text);
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-family: 'Poppins', sans-serif;
     }
-    ul {
-      padding-left: 1.4rem;
+    
+    .hero-subtitle {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      color: #94a3b8;
     }
-    li {
+    
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+    
+    .btn-primary {
+      background: var(--gradient);
+      color: white;
+      box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(124, 58, 237, 0.4);
+    }
+    
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+    
+    /* Секции */
+    .section-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+    
+    .section-card {
+      background: rgba(30, 41, 59, 0.8);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+      backdrop-filter: blur(10px);
+    }
+    
+    .section-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .section-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--gradient);
+    }
+    
+    .section-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(124, 58, 237, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+    
+    .section-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    /* Элементы пути */
+    .path {
+      display: inline-block;
+      background: rgba(6, 182, 212, 0.1);
+      color: #06b6d4;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      margin: 0.5rem 0;
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+    
+    /* Примеры кода */
+    .code-example {
+      margin: 1.5rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    
+    .code-header {
+      padding: 0.75rem 1rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .bad-example .code-header {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+    }
+    
+    .good-example .code-header {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+    }
+    
+    .code-content {
+      padding: 1.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.95rem;
+      white-space: pre-wrap;
+      line-height: 1.6;
+    }
+    
+    .bad-example .code-content {
+      background: rgba(239, 68, 68, 0.05);
+      border-left: 4px solid #ef4444;
+    }
+    
+    .good-example .code-content {
+      background: rgba(16, 185, 129, 0.05);
+      border-left: 4px solid #10b981;
+    }
+    
+    /* Про планы */
+    .pro-plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .plan-card {
+      background: rgba(30, 41, 59, 0.9);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .plan-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .plan-card.pro {
+      border-top: 5px solid #8b5cf6;
+    }
+    
+    .plan-card.pro-plus {
+      border-top: 5px solid #f59e0b;
+    }
+    
+    .plan-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0 0 0 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    
+    .plan-card.pro .plan-badge {
+      background: var(--gradient-pro);
+      color: white;
+    }
+    
+    .plan-card.pro-plus .plan-badge {
+      background: var(--gradient-pro-plus);
+      color: white;
+    }
+    
+    .plan-header {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .plan-card.pro .plan-header {
+      background: var(--gradient-pro);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .plan-card.pro-plus .plan-header {
+      background: var(--gradient-pro-plus);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .plan-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+    
+    .plan-features li {
+      margin-bottom: 0.75rem;
+      padding-left: 1.75rem;
+      position: relative;
+    }
+    
+    .plan-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #10b981;
+      font-weight: bold;
+    }
+    
+    .plan-price {
+      font-size: 2.5rem;
+      font-weight: 800;
       margin-bottom: 0.5rem;
     }
-    .path {
-      color: var(--path-color);
-      font-weight: 500;
+    
+    .plan-card.pro .plan-price {
+      color: #8b5cf6;
     }
-    .brand {
-      color: var(--green);
-      font-weight: 700;
+    
+    .plan-card.pro-plus .plan-price {
+      color: #f59e0b;
     }
-    .note {
-      background: #f0f9ff;
-      padding: 0.9rem;
-      border-radius: 8px;
-      border-left: 3px solid var(--accent);
-      font-size: 0.95em;
-      margin: 1rem 0;
+    
+    .plan-period {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
     }
-    .example-title {
-      font-weight: 600;
-      margin: 1.2rem 0 0.6rem;
+    
+    /* Футер */
+    footer {
+      background: rgba(15, 23, 42, 0.9);
+      padding: 3rem 0;
+      margin-top: 4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
-    .bad {
-      color: #d32f2f;
-      background: #fff5f5;
-      padding: 1rem;
-      border-radius: 8px;
-      border-left: 3px solid #f44336;
-      font-family: monospace;
-      white-space: pre-wrap;
-      font-size: 0.95em;
-    }
-    .good {
-      color: var(--green);
-      background: #f0f9f0;
-      padding: 1rem;
-      border-radius: 8px;
-      border-left: 3px solid var(--green);
-      font-family: monospace;
-      white-space: pre-wrap;
-      font-size: 0.95em;
-    }
-
-    .pro-table {
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-top: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
     }
-    @media (max-width: 600px) {
-      .pro-table {
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: white;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .footer-links a:hover {
+      color: white;
+      padding-left: 5px;
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+    
+    /* Анимации */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fade-in {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .section-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .pro-plans {
         grid-template-columns: 1fr;
       }
     }
-    .pro-plan {
-      position: relative;
-      padding: 1.8rem;
-      border-radius: 12px;
-      overflow: hidden;
-      color: var(--text);
-    }
-    .pro-header {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 1.2rem;
-      text-align: center;
-      color: #e65100;
-    }
-    .pro-pro {
-      background: linear-gradient(to right, var(--gold-light), #ffffff);
-    }
-    .pro-pro-plus {
-      background: linear-gradient(to right, #ffffff, var(--gold-light));
-    }
-    .pro-list {
-      list-style: none;
-      padding: 0;
-    }
-    .pro-list li {
-      margin-bottom: 0.6rem;
-      padding-left: 1.2rem;
-      position: relative;
-    }
-    .pro-list li::before {
-      content: "✓";
+    
+    /* Дополнительные украшения */
+    .sparkle {
       position: absolute;
-      left: 0;
-      color: var(--green);
-      font-weight: bold;
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+      animation: sparkle 3s infinite;
+      z-index: -1;
     }
-    .pro-price {
-      margin-top: 1.2rem;
-      font-weight: 600;
-      text-align: center;
+    
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1) rotate(180deg); }
     }
-    .pro-note {
-      font-size: 0.85em;
-      color: #666;
-      margin-top: 1rem;
-      font-style: italic;
+    
+    .gradient-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-
-    footer {
-      text-align: center;
-      color: #777;
-      font-size: 0.95rem;
-      margin-top: 2rem;
+    
+    /* Конфетти эффект для PRO карточек */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      opacity: 0;
+      z-index: -1;
     }
   </style>
 </head>
 <body>
-
-  <!-- Компактная панель -->
-  <div class="top-nav">
-    <a href="#о-нас">О нас</a>
-    <a href="#объявления-о-трейдах">Трейды</a>
-    <a href="#объявления-о-продажах">Продажи</a>
-    <a href="#профиль">Профиль</a>
-    <a href="#взаимодействие-клиентов">Клиенты</a>
-    <a href="#рефералы">Рефералы</a>
-    <a href="#сделки">Сделки</a>
-    <a href="#правила">Правила</a>
-    <a href="#подписка-pro">PRO</a>
-    <a href="#поддержка">Поддержка</a>
+  <!-- Фоновые частицы -->
+  <div class="bg-particles" id="bg-particles"></div>
+  
+  <!-- Плавающая кнопка -->
+  <div class="floating-btn" id="toTopBtn">
+    <i class="fas fa-arrow-up"></i>
   </div>
-
+  
+  <!-- Хедер -->
+  <header>
+    <div class="header-content">
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        Trade Master
+      </a>
+      
+      <nav class="nav-links">
+        <a href="#о-нас" class="nav-link active"><i class="fas fa-info-circle"></i> О нас</a>
+        <a href="#объявления-о-трейдах" class="nav-link"><i class="fas fa-exchange-alt"></i> Трейды</a>
+        <a href="#объявления-о-продажах" class="nav-link"><i class="fas fa-shopping-cart"></i> Продажи</a>
+        <a href="#подписка-pro" class="nav-link"><i class="fas fa-crown"></i> PRO</a>
+        <a href="#поддержка" class="nav-link"><i class="fas fa-headset"></i> Поддержка</a>
+        <a href="#" class="btn btn-primary" id="connectBtn"><i class="fas fa-robot"></i> Подключиться</a>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- Главный контент -->
   <main>
-    <section id="о-нас">
-      <h2>О нас</h2>
-      <p>Мы — команда, создавшая сервис <span class="brand">Trade Master</span>, чтобы упростить обмен и продажу цифровых товаров. Нашей целью является безопасность, скорость и прозрачность для каждого пользователя.</p>
-    </section>
-
-    <section id="объявления-о-трейдах">
-      <h2>Объявления о трейдах</h2>
-      <p>Публикуйте и находите объявления для обмена предметами, валютой или услугами.</p>
-
-      <p><strong>Создание объявления:</strong><br>
-        <span class="path">Меню → Обмены → Создать трейд → Категория того, что Вы даёте → Описание того, что Вы даёте (лучше описывать как можно подробнее для лучшего поиска) → Категория того, что Вы за это хотите → Описание того, что Вы за это хотите → Опубликовать → Ждать одобрение админов</span>
-      </p>
-
-      <p><strong>Поиск трейдов:</strong><br>
-        <span class="path">Меню → Обмены → Найти трейды → Категория того, что Вы ищете → Описание того, что Вы ищете (лучше описывать как можно подробнее для лучшего поиска)</span>
-      </p>
-
-      <p><strong>Редакция своих трейдов:</strong><br>
-        <span class="path">Меню → Обмены → Мои трейды</span>
-      </p>
-
-      <div class="note">
-        ⚠️ Максимальное количество активных объявлений о трейдах — <strong>5</strong>.<br>
-        С подпиской <span class="brand">PRO</span> лимит увеличивается.
-      </div>
-
-      <p>Все трейды проходят через систему подтверждения — мошенничество исключено.</p>
-
-      <div class="example-title">Пример объявления о трейде</div>
-      <div class="bad">📦 Ваш трейд:
-🎁 Что я даю:
-Категория: 🎮 Предметы
-Описание: в общем я пройду тебе 2 рейда света а ты мне дашь тесто
-🛒 Что я хочу:
-Категория: 🚀 Буст аккаунта
-Описание: ну я хочу что бы ты мне дал тесто</div>
-
-      <div class="good">📦 Ваш трейд:
-🎁 Что я даю:
-Категория: 🛠️ Игровая помощь
-Описание: пройду рейд света | пройду рейд | рейд света | blox fruits | блокс фрутс
-🛒 Что я хочу:
-Категория: 🎮 Предметы
-Описание: фрукт теста | фрукт тесто | тесто | dough fruit | dough | блокс фрутс | blox fruits</div>
-    </section>
-
-    <section id="объявления-о-продажах">
-      <h2>Объявления о продажах</h2>
-      <p>Хотите что-то продать? Создайте объявление — покупатели увидят его мгновенно после модерации.</p>
-
-      <p><strong>Создание объявления:</strong><br>
-        <span class="path">Меню → Продажи → Выставить на продажу → Категория того, что Вы продаёте → Описание того, что Вы продаёте (лучше описывать как можно подробнее для лучшего поиска) → Цена и валюта → Опубликовать → Ждать одобрение админов</span>
-      </p>
-
-      <p><strong>Поиск продаж:</strong><br>
-        <span class="path">Меню → Продажи → Найти продажу → Категория того, что Вы ищете → Описание того, что Вы ищете (лучше описывать как можно подробнее для лучшего поиска)</span>
-      </p>
-
-      <p><strong>Редакция своих продаж:</strong><br>
-        <span class="path">Меню → Продажи → Мои продажи</span>
-      </p>
-
-      <div class="note">
-        ⚠️ Максимальное количество активных объявлений о продажах — <strong>5</strong>.<br>
-        С подписками <span class="brand">PRO</span> и <span class="brand">PRO+</span> лимит увеличивается.
-      </div>
-
-      <div class="example-title">Пример объявления о продаже</div>
-      <div class="bad">📦 Ваше объявление о продаже:
-🎁 Что я продаю:
-Категория: 🎮 Предметы
-Описание: продам дракона в игре бф пишите в лс не дорого
-💰 Цена: 1100 RUB</div>
-
-      <div class="good">📦 Ваше объявление о продаже:
-🎁 Что я продаю:
-Категория: 🎮 Предметы
-Описание: дракон | фрукт дракона | dragon | blox fruits | блокс фрутс
-💰 Цена: 1100 RUB</div>
-    </section>
-
-    <section id="профиль">
-      <h2>Профиль</h2>
-      <p>Чтобы перейти в профиль, зайдите:<br>
-        <span class="path">Меню → Настройки → Настроить профиль</span>
-      </p>
-      <p>Все данные, указываемые Вами, нужны лишь для связи. Вы можете указать в качестве Telegram-юзернейма юзернейм Вашего второго аккаунта, а не основного.</p>
-      <div class="note">
-        🔒 Внутренний юзернейм должен быть <strong>уникальным</strong> и <strong>не подлежит смене</strong>.<br>
-        Изменить внутренний ник можно только с разрешения админа.
+    <!-- Герой секция -->
+    <section class="hero fade-in">
+      <h1>Trade Master PRO</h1>
+      <p class="hero-subtitle">Мощный бот для безопасных обменов и продажи цифровых товаров. Продвинутые инструменты для профессиональных трейдеров.</p>
+      <div class="cta-buttons">
+        <a href="#подписка-pro" class="btn btn-primary"><i class="fas fa-crown"></i> Получить PRO</a>
+        <a href="#объявления-о-трейдах" class="btn btn-secondary"><i class="fas fa-book"></i> Начать обучение</a>
       </div>
     </section>
-
-    <section id="взаимодействие-клиентов">
-      <h2>Взаимодействие клиентов</h2>
-      <p>Чтобы найти пользователя:</p>
-      <p><span class="path">Меню → Найти пользователя → Вводим внутренний ник пользователя, которого ищем (регистр важен!) → Выбираем, что нужно, например: посмотреть трейды и продажи человека или написать ему внутри бота.</span></p>
-    </section>
-
-    <!-- НОВАЯ СЕКЦИЯ: РЕФЕРАЛЫ -->
-    <section id="рефералы">
-      <h2>Реферальная система</h2>
-      <p>Приглашайте друзей и получайте бонусы за каждого нового пользователя!</p>
-      <p>Для просмотра рефералов перейдите:<br>
-        <span class="path">Меню → Настройки → Реферальная система</span>
-      </p>
-      <div class="note">
-        📊 Вы сможете увидеть количество приглашённых пользователей и получать бонусы за их активность.
-      </div>
-    </section>
-
-    <!-- НОВАЯ СЕКЦИЯ: СДЕЛКИ -->
-    <section id="сделки">
-      <h2>Сделки</h2>
-      <p>Для создания сделки найдите объявления других пользователей и нажмите "Создать сделку".</p>
-      <p><strong>Важно:</strong> Сделки создаются только для рейтинга пользователей. Мы не несём ответственности за её проведение.</p>
-      <div class="note">
-        ⚠️ Если вы хотите безопасно проводить сделки, используйте услуги гарантов:<br>
-        <span class="path">Меню → Настройки → Список гарантов</span>
-      </div>
-      <p>Гаранты — это проверенные пользователи, которые помогают безопасно провести сделку за определённую комиссию.</p>
-    </section>
-
-    <section id="правила">
-      <h2>Правила</h2>
-      <p>Мы забаним Вас за:</p>
-      <ul>
-        <li>Неподобающий внутренний ник</li>
-        <li>Спам созданиями трейдов или продаж</li>
-        <li>Спам в поддержку</li>
-        <li>Спам другим пользователям</li>
-        <li>Обман</li>
-        <li>Создание сомнительных объявлений</li>
-      </ul>
-    </section>
-
-    <section id="подписка-pro">
-      <h2>Подписка PRO</h2>
-      <p>Выберите тариф, который подходит именно Вам:</p>
-
-      <div class="pro-table">
-        <div class="pro-plan pro-pro" id="pro-plan-1">
-          <div class="pro-header">PRO</div>
-          <ul class="pro-list">
-            <li>Нет рекламы</li>
-            <li>Ваши объявления сверху*</li>
-            <li>+3 объявления трейдов</li>
-            <li>+3 объявления продаж</li>
-            <li>Эмодзи-статус около ника</li>
-          </ul>
-          <div class="pro-price">149₽ / мес</div>
-          <div class="pro-price">549₽ / 6 мес</div>
-          <div class="pro-price">849₽ / год</div>
+    
+    <!-- Сетка секций -->
+    <div class="section-container">
+      <!-- О нас -->
+      <section id="о-нас" class="section-card fade-in">
+        <div class="section-icon">
+          <i class="fas fa-rocket"></i>
         </div>
-
-        <div class="pro-plan pro-pro-plus" id="pro-plan-2">
-          <div class="pro-header">PRO+</div>
-          <ul class="pro-list">
+        <h2>О нас</h2>
+        <p>Мы — команда, создавшая сервис <span class="gradient-text">Trade Master</span>, чтобы упростить обмен и продажу цифровых товаров. Нашей целью является безопасность, скорость и прозрачность для каждого пользователя.</p>
+        <div class="stats">
+          <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+            <div style="background: rgba(124, 58, 237, 0.1); padding: 0.75rem; border-radius: 10px; text-align: center; flex: 1;">
+              <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">10K+</div>
+              <div style="font-size: 0.9rem; color: #94a3b8;">Пользователей</div>
+            </div>
+            <div style="background: rgba(6, 182, 212, 0.1); padding: 0.75rem; border-radius: 10px; text-align: center; flex: 1;">
+              <div style="font-size: 1.5rem; font-weight: 700; color: var(--secondary);">50K+</div>
+              <div style="font-size: 0.9rem; color: #94a3b8;">Сделок</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Трейды -->
+      <section id="объявления-о-трейдах" class="section-card fade-in">
+        <div class="section-icon">
+          <i class="fas fa-exchange-alt"></i>
+        </div>
+        <h2>Объявления о трейдах</h2>
+        <p>Публикуйте и находите объявления для обмена предметами, валютой или услугами.</p>
+        
+        <p><strong>Создание объявления:</strong></p>
+        <div class="path">Меню → Обмены → Создать трейд → Категория → Описание → Опубликовать</div>
+        
+        <div style="background: rgba(124, 58, 237, 0.1); padding: 1rem; border-radius: 10px; margin-top: 1rem;">
+          <p style="margin-bottom: 0.5rem;"><i class="fas fa-exclamation-circle"></i> Максимальное количество активных объявлений — <strong>5</strong></p>
+          <p style="margin: 0; font-size: 0.9rem;">С подпиской <span class="gradient-text">PRO</span> лимит увеличивается</p>
+        </div>
+        
+        <div class="example-title" style="margin-top: 1.5rem;">Примеры объявлений</div>
+        <div class="code-example bad-example">
+          <div class="code-header">
+            <span><i class="fas fa-times-circle"></i> Плохой пример</span>
+          </div>
+          <div class="code-content">Категория: 🎮 Предметы
+Описание: в общем я пройду тебе 2 рейда света а ты мне дашь тесто</div>
+        </div>
+        
+        <div class="code-example good-example">
+          <div class="code-header">
+            <span><i class="fas fa-check-circle"></i> Хороший пример</span>
+          </div>
+          <div class="code-content">Категория: 🛠️ Игровая помощь
+Описание: пройду рейд света | пройду рейд | рейд света | blox fruits | блокс фрутс</div>
+        </div>
+      </section>
+      
+      <!-- Продажи -->
+      <section id="объявления-о-продажах" class="section-card fade-in">
+        <div class="section-icon">
+          <i class="fas fa-shopping-cart"></i>
+        </div>
+        <h2>Объявления о продажах</h2>
+        <p>Хотите что-то продать? Создайте объявление — покупатели увидят его мгновенно после модерации.</p>
+        
+        <p><strong>Создание объявления:</strong></p>
+        <div class="path">Меню → Продажи → Выставить на продажу → Категория → Описание → Цена → Опубликовать</div>
+        
+        <div style="background: rgba(6, 182, 212, 0.1); padding: 1rem; border-radius: 10px; margin-top: 1rem;">
+          <p style="margin-bottom: 0.5rem;"><i class="fas fa-chart-line"></i> Советы для успешных продаж:</p>
+          <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9rem;">
+            <li>Подробное описание товара</li>
+            <li>Используйте ключевые слова</li>
+            <li>Укажите актуальную цену</li>
+          </ul>
+        </div>
+      </section>
+      
+      <!-- Профиль -->
+      <section id="профиль" class="section-card fade-in">
+        <div class="section-icon">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <h2>Профиль</h2>
+        <p>Настройте свой профиль для удобства взаимодействия с другими пользователями.</p>
+        
+        <div class="path">Меню → Настройки → Настроить профиль</div>
+        
+        <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 10px; margin-top: 1rem;">
+          <p style="margin-bottom: 0.5rem;"><i class="fas fa-lock"></i> Безопасность данных</p>
+          <p style="margin: 0; font-size: 0.9rem;">Все данные, указываемые Вами, нужны лишь для связи. Вы можете указать юзернейм Вашего второго аккаунта.</p>
+        </div>
+      </section>
+      
+      <!-- Рефералы -->
+      <section id="рефералы" class="section-card fade-in">
+        <div class="section-icon">
+          <i class="fas fa-user-friends"></i>
+        </div>
+        <h2>Реферальная система</h2>
+        <p>Приглашайте друзей и получайте бонусы за каждого нового пользователя!</p>
+        
+        <div class="path">Меню → Настройки → Реферальная система</div>
+        
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem; padding: 0.75rem; background: rgba(245, 158, 11, 0.1); border-radius: 10px;">
+          <i class="fas fa-gift" style="color: var(--accent);"></i>
+          <div>
+            <div style="font-weight: 600;">Получайте бонусы</div>
+            <div style="font-size: 0.9rem;">За каждого активного реферала</div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Сделки -->
+      <section id="сделки" class="section-card fade-in">
+        <div class="section-icon">
+          <i class="fas fa-handshake"></i>
+        </div>
+        <h2>Сделки</h2>
+        <p>Безопасное проведение сделок с использованием гарантов.</p>
+        
+        <p>Для создания сделки найдите объявления других пользователей и нажмите "Создать сделку".</p>
+        
+        <div style="background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 10px; margin-top: 1rem;">
+          <p style="margin-bottom: 0.5rem;"><i class="fas fa-exclamation-triangle"></i> Важное предупреждение</p>
+          <p style="margin: 0; font-size: 0.9rem;">Сделки создаются только для рейтинга пользователей. Мы не несём ответственности за её проведение.</p>
+        </div>
+        
+        <div class="path" style="margin-top: 1rem;">Меню → Настройки → Список гарантов</div>
+      </section>
+    </div>
+    
+    <!-- PRO подписка -->
+    <section id="подписка-pro" class="fade-in">
+      <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem; font-family: 'Poppins', sans-serif;" class="gradient-text">PRO Подписка</h2>
+      <p style="text-align: center; max-width: 700px; margin: 0 auto 3rem; color: #94a3b8; font-size: 1.1rem;">Выберите тариф, который подходит именно Вам. Откройте все возможности Trade Master!</p>
+      
+      <div class="pro-plans">
+        <!-- PRO план -->
+        <div class="plan-card pro" id="pro-plan">
+          <div class="plan-badge">ПОПУЛЯРНЫЙ</div>
+          <h3 class="plan-header">PRO</h3>
+          <p style="margin-bottom: 1.5rem; color: #94a3b8;">Идеально для активных пользователей</p>
+          
+          <ul class="plan-features">
             <li>Нет рекламы</li>
             <li>Ваши объявления сверху*</li>
             <li>+3 объявления трейдов</li>
             <li>+3 объявления продаж</li>
             <li>Эмодзи-статус около ника</li>
+            <li>Приоритетная поддержка</li>
+          </ul>
+          
+          <div class="plan-price">149₽ <span style="font-size: 1rem;">/мес</span></div>
+          <div class="plan-period">Или 849₽ за год (экономия 30%)</div>
+          
+          <button class="btn btn-primary" style="width: 100%;"><i class="fas fa-shopping-cart"></i> Выбрать PRO</button>
+        </div>
+        
+        <!-- PRO+ план -->
+        <div class="plan-card pro-plus" id="pro-plus-plan">
+          <div class="plan-badge">ПРЕМИУМ</div>
+          <h3 class="plan-header">PRO+</h3>
+          <p style="margin-bottom: 1.5rem; color: #94a3b8;">Максимальные возможности для профессионалов</p>
+          
+          <ul class="plan-features">
+            <li>Все функции PRO</li>
             <li>Бесплатная реклама**</li>
-            <li>Розыгрыши</li>
+            <li>Розыгрыши и бонусы</li>
             <li>Навязчивая реклама объявлений***</li>
+            <li>Расширенная аналитика</li>
+            <li>Персональный менеджер</li>
+            <li>Ранний доступ к новым функциям</li>
           </ul>
-          <div class="pro-price">249₽ / мес</div>
-          <div class="pro-price">749₽ / 6 мес</div>
-          <div class="pro-price">1049₽ / год</div>
+          
+          <div class="plan-price">249₽ <span style="font-size: 1rem;">/мес</span></div>
+          <div class="plan-period">Или 1049₽ за год (экономия 45%)</div>
+          
+          <button class="btn btn-primary" style="width: 100%; background: var(--gradient-pro-plus);"><i class="fas fa-crown"></i> Выбрать PRO+</button>
         </div>
       </div>
-
-      <div class="pro-note">
-        * — при поиске Ваши объявления будут находиться сверху.<br>
-        ** — раз в неделю Вы можете бесплатно рекламировать что угодно в нашем боте.<br>
-        *** — все Ваши объявления будут навязчиво присланы некоторым пользователям.
+      
+      <div style="background: rgba(30, 41, 59, 0.8); padding: 1.5rem; border-radius: var(--radius); margin-top: 2rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+        <p style="margin-bottom: 0.5rem;"><i class="fas fa-info-circle"></i> Примечания к тарифам:</p>
+        <ul style="margin: 0; padding-left: 1.2rem; color: #94a3b8;">
+          <li>* — при поиске Ваши объявления будут находиться сверху.</li>
+          <li>** — раз в неделю Вы можете бесплатно рекламировать что угодно в нашем боте.</li>
+          <li>*** — все Ваши объявления будут навязчиво присланы некоторым пользователям.</li>
+        </ul>
       </div>
     </section>
-
-    <section id="поддержка">
+    
+    <!-- Поддержка -->
+    <section id="поддержка" class="section-card fade-in" style="max-width: 800px; margin: 4rem auto;">
+      <div class="section-icon">
+        <i class="fas fa-headset"></i>
+      </div>
       <h2>Поддержка</h2>
-      <p>Для связи с нами перейдите:<br>
-        <span class="path">Меню → Настройки → Обратная связь</span>
-      </p>
+      <p style="margin-bottom: 1.5rem;">Мы всегда готовы помочь вам с любыми вопросами. Свяжитесь с нашей поддержкой через бота.</p>
+      
+      <div class="path" style="margin-bottom: 1.5rem;">Меню → Настройки → Обратная связь</div>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
+        <div style="text-align: center; padding: 1.5rem; background: rgba(124, 58, 237, 0.1); border-radius: 10px;">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary);"><i class="fas fa-clock"></i></div>
+          <div style="font-weight: 600;">Быстрый ответ</div>
+          <div style="font-size: 0.9rem; color: #94a3b8;">Среднее время ответа: 15 мин</div>
+        </div>
+        
+        <div style="text-align: center; padding: 1.5rem; background: rgba(6, 182, 212, 0.1); border-radius: 10px;">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--secondary);"><i class="fas fa-shield-alt"></i></div>
+          <div style="font-weight: 600;">Безопасность</div>
+          <div style="font-size: 0.9rem; color: #94a3b8;">Все обращения конфиденциальны</div>
+        </div>
+        
+        <div style="text-align: center; padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--success);"><i class="fas fa-users"></i></div>
+          <div style="font-weight: 600;">Команда экспертов</div>
+          <div style="font-size: 0.9rem; color: #94a3b8;">Опытные специалисты</div>
+        </div>
+      </div>
     </section>
   </main>
-
+  
+  <!-- Футер -->
   <footer>
-    <p>© 2026 <span class="brand">Trade Master</span> — сделки, которым можно доверять.</p>
+    <div class="footer-content">
+      <div>
+        <div class="footer-logo">
+          <i class="fas fa-shield-alt" style="color: var(--primary);"></i>
+          Trade Master
+        </div>
+        <p style="color: #94a3b8; margin-bottom: 1.5rem;">Безопасные сделки, которым можно доверять. Самый продвинутый бот для трейдов и продаж.</p>
+        <div style="display: flex; gap: 1rem;">
+          <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="fab fa-telegram"></i></a>
+          <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="fab fa-discord"></i></a>
+          <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      
+      <div>
+        <h3 style="color: white; margin-bottom: 1.5rem; font-family: 'Poppins', sans-serif;">Навигация</h3>
+        <div class="footer-links">
+          <a href="#о-нас">О нас</a>
+          <a href="#объявления-о-трейдах">Трейды</a>
+          <a href="#объявления-о-продажах">Продажи</a>
+          <a href="#подписка-pro">PRO подписка</a>
+          <a href="#поддержка">Поддержка</a>
+        </div>
+      </div>
+      
+      <div>
+        <h3 style="color: white; margin-bottom: 1.5rem; font-family: 'Poppins', sans-serif;">Полезное</h3>
+        <div class="footer-links">
+          <a href="#профиль">Настройка профиля</a>
+          <a href="#рефералы">Реферальная система</a>
+          <a href="#сделки">Безопасные сделки</a>
+          <a href="#правила">Правила использования</a>
+          <a href="#">Частые вопросы</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      © 2026 <span class="gradient-text">Trade Master</span> — сделки, которым можно доверять.
+    </div>
   </footer>
-
-  <!-- СНЕЖИНКИ -->
+  
   <script>
-    function createSnowflakes(container, count, baseDuration, maxSize, opacity) {
-      container.style.position = 'relative';
-      container.style.overflow = 'hidden';
-
-      const snowContainer = document.createElement('div');
-      snowContainer.style.position = 'absolute';
-      snowContainer.style.top = '0';
-      snowContainer.style.left = '0';
-      snowContainer.style.width = '100%';
-      snowContainer.style.height = '100%';
-      snowContainer.style.pointerEvents = 'none';
-      snowContainer.style.zIndex = '0';
-      container.appendChild(snowContainer);
-
-      for (let i = 0; i < count; i++) {
-        const size = Math.random() * maxSize + 2;
-        const flake = document.createElement('div');
-        flake.style.position = 'absolute';
-        flake.style.width = size + 'px';
-        flake.style.height = size + 'px';
-        flake.style.backgroundColor = 'rgba(255, 213, 79, ' + opacity + ')';
-        flake.style.borderRadius = '50%';
-        flake.style.left = Math.random() * 100 + '%';
-        flake.style.top = '-20px';
-
-        const anim = flake.animate([
-          { transform: 'translateY(0) translateX(0)' },
-          { transform: `translateY(${container.clientHeight + 30}px) translateX(${(Math.random() - 0.5) * 40}px)` }
-        ], {
-          duration: (baseDuration + Math.random() * 50) * 1000,
-          iterations: Infinity,
-          easing: 'linear'
-        });
-
-        snowContainer.appendChild(flake);
+    // Создание фоновых частиц
+    function createParticles() {
+      const container = document.getElementById('bg-particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        const size = Math.random() * 100 + 50;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        particle.style.background = `radial-gradient(circle, rgba(124, 58, 237, ${Math.random() * 0.1}) 0%, transparent 70%)`;
+        particle.style.animationDuration = `${Math.random() * 30 + 20}s`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        
+        container.appendChild(particle);
+      }
+      
+      // Создание сверкающих точек
+      for (let i = 0; i < 20; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+        sparkle.style.left = `${Math.random() * 100}%`;
+        sparkle.style.top = `${Math.random() * 100}%`;
+        sparkle.style.animationDelay = `${Math.random() * 5}s`;
+        container.appendChild(sparkle);
       }
     }
-
-    window.addEventListener('load', () => {
+    
+    // Конфетти эффект для PRO карточек
+    function createConfetti(container) {
+      const colors = ['#7c3aed', '#06b6d4', '#f59e0b', '#10b981', '#ef4444'];
+      
+      for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.width = `${Math.random() * 10 + 5}px`;
+        confetti.style.height = `${Math.random() * 10 + 5}px`;
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.top = `${Math.random() * 100}%`;
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        
+        // Анимация
+        const animation = confetti.animate([
+          { transform: 'translateY(-100px) rotate(0deg)', opacity: 1 },
+          { transform: `translateY(${container.clientHeight + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+        ], {
+          duration: Math.random() * 3000 + 2000,
+          delay: Math.random() * 1000,
+          easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+        });
+        
+        container.appendChild(confetti);
+        
+        // Удаление после завершения анимации
+        animation.onfinish = () => {
+          confetti.remove();
+        };
+      }
+    }
+    
+    // Прокрутка к верху
+    document.getElementById('toTopBtn').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Анимация при наведении на PRO карточки
+    document.getElementById('pro-plan').addEventListener('mouseenter', function() {
+      createConfetti(this);
+    });
+    
+    document.getElementById('pro-plus-plan').addEventListener('mouseenter', function() {
+      createConfetti(this);
+    });
+    
+    // Анимация для кнопки подключения
+    document.getElementById('connectBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Подключение...';
+      this.style.background = 'var(--gradient-gold)';
+      
       setTimeout(() => {
-        const pro1 = document.querySelector('.pro-pro');
-        const pro2 = document.querySelector('.pro-pro-plus');
-        if (pro1) createSnowflakes(pro1, 15, 7, 3, 0.5);
-        if (pro2) createSnowflakes(pro2, 25, 5, 5, 0.6);
-      }, 300);
+        this.innerHTML = '<i class="fas fa-check"></i> Подключено!';
+        this.style.background = 'var(--success)';
+        
+        setTimeout(() => {
+          this.innerHTML = '<i class="fas fa-robot"></i> Подключиться';
+          this.style.background = '';
+        }, 2000);
+      }, 1500);
+    });
+    
+    // Активация навигационных ссылок при прокрутке
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    window.addEventListener('scroll', () => {
+      let current = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        if (scrollY >= sectionTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+      
+      // Показать/скрыть кнопку "наверх"
+      const toTopBtn = document.getElementById('toTopBtn');
+      if (window.scrollY > 500) {
+        toTopBtn.style.opacity = '1';
+        toTopBtn.style.visibility = 'visible';
+      } else {
+        toTopBtn.style.opacity = '0';
+        toTopBtn.style.visibility = 'hidden';
+      }
+    });
+    
+    // Анимация при загрузке
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      
+      // Задержка для анимации появления элементов
+      const fadeElements = document.querySelectorAll('.fade-in');
+      fadeElements.forEach((el, index) => {
+        setTimeout(() => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, index * 100);
+      });
+      
+      // Имитация снежинок на PRO карточках
+      setInterval(() => {
+        if (Math.random() > 0.7) {
+          const plans = [document.getElementById('pro-plan'), document.getElementById('pro-plus-plan')];
+          const randomPlan = plans[Math.floor(Math.random() * plans.length)];
+          if (randomPlan) createConfetti(randomPlan);
+        }
+      }, 3000);
     });
   </script>
-
 </body>
 </html>
