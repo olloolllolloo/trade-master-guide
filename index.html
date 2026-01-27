@@ -21,9 +21,9 @@
       --gradient-gold: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
       --gradient-pro: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
       --gradient-pro-plus: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
-      --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
-      --radius: 16px;
+      --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 15px 30px rgba(0, 0, 0, 0.12);
+      --radius: 12px;
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
@@ -35,14 +35,14 @@
     
     html {
       scroll-behavior: smooth;
-      font-size: 16px;
+      font-size: 14px;
     }
     
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       color: #e2e8f0;
-      line-height: 1.7;
+      line-height: 1.6;
       overflow-x: hidden;
       position: relative;
       min-height: 100vh;
@@ -73,126 +73,92 @@
       100% { transform: translateY(0) translateX(0) rotate(360deg); }
     }
     
-    /* Плавающие кнопки */
+    /* Плавающая кнопка */
     .floating-btn {
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 60px;
-      height: 60px;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 50px;
+      height: 50px;
       background: var(--gradient);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       box-shadow: var(--shadow-lg);
       z-index: 1000;
       cursor: pointer;
       transition: var(--transition);
       animation: pulse 2s infinite;
+      opacity: 0;
+      visibility: hidden;
+    }
+    
+    .floating-btn.visible {
+      opacity: 1;
+      visibility: visible;
     }
     
     .floating-btn:hover {
       transform: scale(1.1) rotate(90deg);
-      box-shadow: 0 15px 30px rgba(124, 58, 237, 0.4);
+      box-shadow: 0 12px 25px rgba(124, 58, 237, 0.4);
     }
     
     @keyframes pulse {
       0% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.7); }
-      70% { box-shadow: 0 0 0 15px rgba(124, 58, 237, 0); }
+      70% { box-shadow: 0 0 0 12px rgba(124, 58, 237, 0); }
       100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
     }
     
-    /* Хедер */
-    header {
-      background: rgba(15, 23, 42, 0.9);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+    /* Упрощенный хедер */
+    .simple-header {
       padding: 1rem 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .header-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
     
     .logo {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.5rem;
       font-family: 'Poppins', sans-serif;
       font-weight: 700;
-      font-size: 1.8rem;
+      font-size: 1.4rem;
       color: white;
       text-decoration: none;
     }
     
     .logo-icon {
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
       background: var(--gradient);
-      border-radius: 10px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
-    }
-    
-    /* Навигация */
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
-    }
-    
-    .nav-link {
-      color: #cbd5e1;
-      text-decoration: none;
-      font-weight: 500;
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .nav-link:hover {
-      color: white;
-      background: rgba(124, 58, 237, 0.1);
-    }
-    
-    .nav-link.active {
-      background: var(--gradient);
-      color: white;
+      font-size: 1.1rem;
     }
     
     /* Главный контейнер */
     main {
-      max-width: 1200px;
-      margin: 3rem auto;
-      padding: 0 2rem;
+      max-width: 1000px;
+      margin: 1.5rem auto;
+      padding: 0 1.5rem;
       position: relative;
     }
     
     /* Герой секция */
     .hero {
       text-align: center;
-      margin-bottom: 4rem;
-      padding: 4rem 2rem;
+      margin-bottom: 2.5rem;
+      padding: 2.5rem 1.5rem;
       background: rgba(30, 41, 59, 0.7);
       border-radius: var(--radius);
       position: relative;
       overflow: hidden;
-      border: 1px solid rgba(124, 58, 237, 0.3);
+      border: 1px solid rgba(124, 58, 237, 0.2);
       box-shadow: var(--shadow);
     }
     
@@ -203,14 +169,14 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 70%);
       z-index: -1;
     }
     
     .hero h1 {
-      font-size: 3.5rem;
+      font-size: 2.2rem;
       font-weight: 800;
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
       background: var(--gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -219,70 +185,26 @@
     }
     
     .hero-subtitle {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto 2rem;
-      color: #94a3b8;
-    }
-    
-    .cta-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    
-    .btn {
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      font-weight: 600;
       font-size: 1rem;
-      border: none;
-      cursor: pointer;
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      text-decoration: none;
-    }
-    
-    .btn-primary {
-      background: var(--gradient);
-      color: white;
-      box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3);
-    }
-    
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 30px rgba(124, 58, 237, 0.4);
-    }
-    
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
-    }
-    
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-3px);
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+      color: #94a3b8;
     }
     
     /* Секции */
     .section-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 2rem;
-      margin-bottom: 4rem;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
     }
     
     .section-card {
       background: rgba(30, 41, 59, 0.8);
       border-radius: var(--radius);
-      padding: 2rem;
+      padding: 1.5rem;
       transition: var(--transition);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       position: relative;
       overflow: hidden;
       height: 100%;
@@ -290,8 +212,8 @@
     }
     
     .section-card:hover {
-      transform: translateY(-10px);
-      border-color: var(--primary);
+      transform: translateY(-5px);
+      border-color: rgba(124, 58, 237, 0.3);
       box-shadow: var(--shadow-lg);
     }
     
@@ -301,26 +223,26 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 5px;
+      height: 4px;
       background: var(--gradient);
     }
     
     .section-icon {
-      width: 60px;
-      height: 60px;
+      width: 45px;
+      height: 45px;
       background: rgba(124, 58, 237, 0.1);
-      border-radius: 12px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
       color: var(--primary);
     }
     
     .section-card h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
       color: white;
       font-family: 'Poppins', sans-serif;
     }
@@ -328,99 +250,100 @@
     /* Элементы пути */
     .path {
       display: inline-block;
-      background: rgba(6, 182, 212, 0.1);
+      background: rgba(6, 182, 212, 0.08);
       color: #06b6d4;
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
       font-family: 'Courier New', monospace;
-      font-size: 0.9rem;
-      margin: 0.5rem 0;
-      border: 1px solid rgba(6, 182, 212, 0.3);
+      font-size: 0.85rem;
+      margin: 0.4rem 0;
+      border: 1px solid rgba(6, 182, 212, 0.2);
     }
     
     /* Примеры кода */
     .code-example {
-      margin: 1.5rem 0;
-      border-radius: 12px;
+      margin: 1.2rem 0;
+      border-radius: 10px;
       overflow: hidden;
       box-shadow: var(--shadow);
     }
     
     .code-header {
-      padding: 0.75rem 1rem;
+      padding: 0.6rem 0.8rem;
       font-weight: 600;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-size: 0.9rem;
     }
     
     .bad-example .code-header {
-      background: rgba(239, 68, 68, 0.2);
+      background: rgba(239, 68, 68, 0.15);
       color: #f87171;
     }
     
     .good-example .code-header {
-      background: rgba(16, 185, 129, 0.2);
+      background: rgba(16, 185, 129, 0.15);
       color: #34d399;
     }
     
     .code-content {
-      padding: 1.5rem;
+      padding: 1rem;
       font-family: 'Courier New', monospace;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       white-space: pre-wrap;
-      line-height: 1.6;
+      line-height: 1.5;
     }
     
     .bad-example .code-content {
-      background: rgba(239, 68, 68, 0.05);
-      border-left: 4px solid #ef4444;
+      background: rgba(239, 68, 68, 0.03);
+      border-left: 3px solid #ef4444;
     }
     
     .good-example .code-content {
-      background: rgba(16, 185, 129, 0.05);
-      border-left: 4px solid #10b981;
+      background: rgba(16, 185, 129, 0.03);
+      border-left: 3px solid #10b981;
     }
     
     /* Про планы */
     .pro-plans {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin: 3rem 0;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
     }
     
     .plan-card {
       background: rgba(30, 41, 59, 0.9);
       border-radius: var(--radius);
-      padding: 2.5rem 2rem;
+      padding: 1.8rem 1.5rem;
       position: relative;
       overflow: hidden;
       transition: var(--transition);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
     
     .plan-card:hover {
-      transform: translateY(-10px);
+      transform: translateY(-5px);
       box-shadow: var(--shadow-lg);
     }
     
     .plan-card.pro {
-      border-top: 5px solid #8b5cf6;
+      border-top: 4px solid #8b5cf6;
     }
     
     .plan-card.pro-plus {
-      border-top: 5px solid #f59e0b;
+      border-top: 4px solid #f59e0b;
     }
     
     .plan-badge {
       position: absolute;
       top: 0;
       right: 0;
-      padding: 0.5rem 1.5rem;
-      border-radius: 0 0 0 20px;
+      padding: 0.4rem 1.2rem;
+      border-radius: 0 0 0 16px;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
     
     .plan-card.pro .plan-badge {
@@ -434,9 +357,9 @@
     }
     
     .plan-header {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       font-family: 'Poppins', sans-serif;
     }
     
@@ -456,13 +379,14 @@
     
     .plan-features {
       list-style: none;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
     
     .plan-features li {
-      margin-bottom: 0.75rem;
-      padding-left: 1.75rem;
+      margin-bottom: 0.6rem;
+      padding-left: 1.5rem;
       position: relative;
+      font-size: 0.9rem;
     }
     
     .plan-features li::before {
@@ -474,9 +398,9 @@
     }
     
     .plan-price {
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: 800;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
     
     .plan-card.pro .plan-price {
@@ -489,69 +413,70 @@
     
     .plan-period {
       color: #94a3b8;
-      font-size: 0.9rem;
-      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+      margin-bottom: 1.2rem;
     }
     
     /* Футер */
     footer {
       background: rgba(15, 23, 42, 0.9);
-      padding: 3rem 0;
-      margin-top: 4rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 2rem 0;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
     
     .footer-content {
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 0 2rem;
+      padding: 0 1.5rem;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
     }
     
     .footer-logo {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.5rem;
       font-family: 'Poppins', sans-serif;
       font-weight: 700;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       color: white;
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
     }
     
     .footer-links {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.6rem;
     }
     
     .footer-links a {
       color: #94a3b8;
       text-decoration: none;
       transition: var(--transition);
+      font-size: 0.9rem;
     }
     
     .footer-links a:hover {
       color: white;
-      padding-left: 5px;
+      padding-left: 3px;
     }
     
     .copyright {
       text-align: center;
-      padding-top: 2rem;
-      margin-top: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.5rem;
+      margin-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
       color: #94a3b8;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
     
     /* Анимации */
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px);
       }
       to {
         opacity: 1;
@@ -560,42 +485,17 @@
     }
     
     .fade-in {
-      animation: fadeInUp 0.8s ease-out forwards;
-    }
-    
-    /* Адаптивность */
-    @media (max-width: 768px) {
-      .header-content {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      
-      .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-      
-      .section-container {
-        grid-template-columns: 1fr;
-      }
-      
-      .pro-plans {
-        grid-template-columns: 1fr;
-      }
+      animation: fadeInUp 0.6s ease-out forwards;
     }
     
     /* Дополнительные украшения */
     .sparkle {
       position: absolute;
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       background: white;
       border-radius: 50%;
-      box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 8px 1px rgba(255, 255, 255, 0.8);
       animation: sparkle 3s infinite;
       z-index: -1;
     }
@@ -615,10 +515,86 @@
     /* Конфетти эффект для PRO карточек */
     .confetti {
       position: absolute;
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       opacity: 0;
       z-index: -1;
+    }
+    
+    /* Правила */
+    .rules-list {
+      list-style: none;
+      margin-top: 1rem;
+    }
+    
+    .rules-list li {
+      margin-bottom: 0.5rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    
+    .rules-list li::before {
+      content: '✗';
+      position: absolute;
+      left: 0;
+      color: #ef4444;
+      font-weight: bold;
+    }
+    
+    /* Компактные блоки */
+    .compact-block {
+      background: rgba(124, 58, 237, 0.08);
+      padding: 0.8rem;
+      border-radius: 8px;
+      margin: 0.8rem 0;
+      border-left: 3px solid var(--primary);
+      font-size: 0.9rem;
+    }
+    
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      html {
+        font-size: 13px;
+      }
+      
+      .section-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .pro-plans {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      main {
+        padding: 0 1rem;
+      }
+      
+      .hero {
+        padding: 1.8rem 1rem;
+      }
+      
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      html {
+        font-size: 12px;
+      }
+      
+      .section-card {
+        padding: 1.2rem;
+      }
+      
+      .plan-card {
+        padding: 1.5rem 1.2rem;
+      }
     }
   </style>
 </head>
@@ -631,26 +607,15 @@
     <i class="fas fa-arrow-up"></i>
   </div>
   
-  <!-- Хедер -->
-  <header>
-    <div class="header-content">
-      <a href="#" class="logo">
-        <div class="logo-icon">
-          <i class="fas fa-shield-alt"></i>
-        </div>
-        Trade Master
-      </a>
-      
-      <nav class="nav-links">
-        <a href="#о-нас" class="nav-link active"><i class="fas fa-info-circle"></i> О нас</a>
-        <a href="#объявления-о-трейдах" class="nav-link"><i class="fas fa-exchange-alt"></i> Трейды</a>
-        <a href="#объявления-о-продажах" class="nav-link"><i class="fas fa-shopping-cart"></i> Продажи</a>
-        <a href="#подписка-pro" class="nav-link"><i class="fas fa-crown"></i> PRO</a>
-        <a href="#поддержка" class="nav-link"><i class="fas fa-headset"></i> Поддержка</a>
-        <a href="#" class="btn btn-primary" id="connectBtn"><i class="fas fa-robot"></i> Подключиться</a>
-      </nav>
-    </div>
-  </header>
+  <!-- Упрощенный хедер -->
+  <div class="simple-header">
+    <a href="#" class="logo">
+      <div class="logo-icon">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      Trade Master
+    </a>
+  </div>
   
   <!-- Главный контент -->
   <main>
@@ -658,10 +623,6 @@
     <section class="hero fade-in">
       <h1>Trade Master PRO</h1>
       <p class="hero-subtitle">Мощный бот для безопасных обменов и продажи цифровых товаров. Продвинутые инструменты для профессиональных трейдеров.</p>
-      <div class="cta-buttons">
-        <a href="#подписка-pro" class="btn btn-primary"><i class="fas fa-crown"></i> Получить PRO</a>
-        <a href="#объявления-о-трейдах" class="btn btn-secondary"><i class="fas fa-book"></i> Начать обучение</a>
-      </div>
     </section>
     
     <!-- Сетка секций -->
@@ -674,14 +635,14 @@
         <h2>О нас</h2>
         <p>Мы — команда, создавшая сервис <span class="gradient-text">Trade Master</span>, чтобы упростить обмен и продажу цифровых товаров. Нашей целью является безопасность, скорость и прозрачность для каждого пользователя.</p>
         <div class="stats">
-          <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-            <div style="background: rgba(124, 58, 237, 0.1); padding: 0.75rem; border-radius: 10px; text-align: center; flex: 1;">
-              <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">10K+</div>
-              <div style="font-size: 0.9rem; color: #94a3b8;">Пользователей</div>
+          <div style="display: flex; gap: 0.8rem; margin-top: 1rem;">
+            <div style="background: rgba(124, 58, 237, 0.08); padding: 0.6rem; border-radius: 8px; text-align: center; flex: 1;">
+              <div style="font-size: 1.2rem; font-weight: 700; color: var(--primary);">10K+</div>
+              <div style="font-size: 0.8rem; color: #94a3b8;">Пользователей</div>
             </div>
-            <div style="background: rgba(6, 182, 212, 0.1); padding: 0.75rem; border-radius: 10px; text-align: center; flex: 1;">
-              <div style="font-size: 1.5rem; font-weight: 700; color: var(--secondary);">50K+</div>
-              <div style="font-size: 0.9rem; color: #94a3b8;">Сделок</div>
+            <div style="background: rgba(6, 182, 212, 0.08); padding: 0.6rem; border-radius: 8px; text-align: center; flex: 1;">
+              <div style="font-size: 1.2rem; font-weight: 700; color: var(--secondary);">50K+</div>
+              <div style="font-size: 0.8rem; color: #94a3b8;">Сделок</div>
             </div>
           </div>
         </div>
@@ -698,12 +659,12 @@
         <p><strong>Создание объявления:</strong></p>
         <div class="path">Меню → Обмены → Создать трейд → Категория → Описание → Опубликовать</div>
         
-        <div style="background: rgba(124, 58, 237, 0.1); padding: 1rem; border-radius: 10px; margin-top: 1rem;">
-          <p style="margin-bottom: 0.5rem;"><i class="fas fa-exclamation-circle"></i> Максимальное количество активных объявлений — <strong>5</strong></p>
-          <p style="margin: 0; font-size: 0.9rem;">С подпиской <span class="gradient-text">PRO</span> лимит увеличивается</p>
+        <div class="compact-block">
+          <p style="margin-bottom: 0.3rem;"><i class="fas fa-exclamation-circle"></i> Максимальное количество активных объявлений — <strong>5</strong></p>
+          <p style="margin: 0; font-size: 0.85rem;">С подпиской <span class="gradient-text">PRO</span> лимит увеличивается</p>
         </div>
         
-        <div class="example-title" style="margin-top: 1.5rem;">Примеры объявлений</div>
+        <div style="margin-top: 1rem; font-weight: 600; color: #cbd5e1;">Примеры объявлений</div>
         <div class="code-example bad-example">
           <div class="code-header">
             <span><i class="fas fa-times-circle"></i> Плохой пример</span>
@@ -732,9 +693,9 @@
         <p><strong>Создание объявления:</strong></p>
         <div class="path">Меню → Продажи → Выставить на продажу → Категория → Описание → Цена → Опубликовать</div>
         
-        <div style="background: rgba(6, 182, 212, 0.1); padding: 1rem; border-radius: 10px; margin-top: 1rem;">
-          <p style="margin-bottom: 0.5rem;"><i class="fas fa-chart-line"></i> Советы для успешных продаж:</p>
-          <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9rem;">
+        <div style="background: rgba(6, 182, 212, 0.08); padding: 0.8rem; border-radius: 8px; margin-top: 0.8rem;">
+          <p style="margin-bottom: 0.3rem;"><i class="fas fa-chart-line"></i> Советы для успешных продаж:</p>
+          <ul style="margin: 0; padding-left: 1rem; font-size: 0.85rem;">
             <li>Подробное описание товара</li>
             <li>Используйте ключевые слова</li>
             <li>Укажите актуальную цену</li>
@@ -752,9 +713,9 @@
         
         <div class="path">Меню → Настройки → Настроить профиль</div>
         
-        <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 10px; margin-top: 1rem;">
-          <p style="margin-bottom: 0.5rem;"><i class="fas fa-lock"></i> Безопасность данных</p>
-          <p style="margin: 0; font-size: 0.9rem;">Все данные, указываемые Вами, нужны лишь для связи. Вы можете указать юзернейм Вашего второго аккаунта.</p>
+        <div style="background: rgba(16, 185, 129, 0.08); padding: 0.8rem; border-radius: 8px; margin-top: 0.8rem;">
+          <p style="margin-bottom: 0.3rem;"><i class="fas fa-lock"></i> Безопасность данных</p>
+          <p style="margin: 0; font-size: 0.85rem;">Все данные, указываемые Вами, нужны лишь для связи. Вы можете указать юзернейм Вашего второго аккаунта.</p>
         </div>
       </section>
       
@@ -768,11 +729,11 @@
         
         <div class="path">Меню → Настройки → Реферальная система</div>
         
-        <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem; padding: 0.75rem; background: rgba(245, 158, 11, 0.1); border-radius: 10px;">
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.8rem; padding: 0.6rem; background: rgba(245, 158, 11, 0.08); border-radius: 8px;">
           <i class="fas fa-gift" style="color: var(--accent);"></i>
           <div>
-            <div style="font-weight: 600;">Получайте бонусы</div>
-            <div style="font-size: 0.9rem;">За каждого активного реферала</div>
+            <div style="font-weight: 600; font-size: 0.9rem;">Получайте бонусы</div>
+            <div style="font-size: 0.8rem; color: #94a3b8;">За каждого активного реферала</div>
           </div>
         </div>
       </section>
@@ -787,26 +748,59 @@
         
         <p>Для создания сделки найдите объявления других пользователей и нажмите "Создать сделку".</p>
         
-        <div style="background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 10px; margin-top: 1rem;">
-          <p style="margin-bottom: 0.5rem;"><i class="fas fa-exclamation-triangle"></i> Важное предупреждение</p>
-          <p style="margin: 0; font-size: 0.9rem;">Сделки создаются только для рейтинга пользователей. Мы не несём ответственности за её проведение.</p>
+        <div style="background: rgba(239, 68, 68, 0.08); padding: 0.8rem; border-radius: 8px; margin-top: 0.8rem;">
+          <p style="margin-bottom: 0.3rem;"><i class="fas fa-exclamation-triangle"></i> Важное предупреждение</p>
+          <p style="margin: 0; font-size: 0.85rem;">Сделки создаются только для рейтинга пользователей. Мы не несём ответственности за её проведение.</p>
         </div>
         
-        <div class="path" style="margin-top: 1rem;">Меню → Настройки → Список гарантов</div>
+        <div class="path" style="margin-top: 0.8rem;">Меню → Настройки → Список гарантов</div>
+      </section>
+      
+      <!-- Взаимодействие клиентов -->
+      <section id="взаимодействие-клиентов" class="section-card fade-in">
+        <div class="section-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <h2>Взаимодействие клиентов</h2>
+        <p>Найдите пользователя для сделки или обмена.</p>
+        
+        <div class="path">Меню → Найти пользователя → Вводим внутренний ник → Выбираем действие</div>
+        
+        <div style="background: rgba(124, 58, 237, 0.08); padding: 0.8rem; border-radius: 8px; margin-top: 0.8rem;">
+          <p style="margin-bottom: 0.3rem;"><i class="fas fa-search"></i> Поиск пользователей</p>
+          <p style="margin: 0; font-size: 0.85rem;">Регистр имени пользователя имеет значение! Вводите точное совпадение.</p>
+        </div>
+      </section>
+      
+      <!-- Правила -->
+      <section id="правила" class="section-card fade-in">
+        <div class="section-icon">
+          <i class="fas fa-gavel"></i>
+        </div>
+        <h2>Правила</h2>
+        <p>Мы забаним Вас за:</p>
+        <ul class="rules-list">
+          <li>Неподобающий внутренний ник</li>
+          <li>Спам созданиями трейдов или продаж</li>
+          <li>Спам в поддержку</li>
+          <li>Спам другим пользователям</li>
+          <li>Обман</li>
+          <li>Создание сомнительных объявлений</li>
+        </ul>
       </section>
     </div>
     
     <!-- PRO подписка -->
     <section id="подписка-pro" class="fade-in">
-      <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem; font-family: 'Poppins', sans-serif;" class="gradient-text">PRO Подписка</h2>
-      <p style="text-align: center; max-width: 700px; margin: 0 auto 3rem; color: #94a3b8; font-size: 1.1rem;">Выберите тариф, который подходит именно Вам. Откройте все возможности Trade Master!</p>
+      <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.8rem; font-family: 'Poppins', sans-serif;" class="gradient-text">PRO Подписка</h2>
+      <p style="text-align: center; max-width: 600px; margin: 0 auto 2rem; color: #94a3b8; font-size: 0.95rem;">Выберите тариф, который подходит именно Вам. Откройте все возможности Trade Master!</p>
       
       <div class="pro-plans">
         <!-- PRO план -->
         <div class="plan-card pro" id="pro-plan">
           <div class="plan-badge">ПОПУЛЯРНЫЙ</div>
           <h3 class="plan-header">PRO</h3>
-          <p style="margin-bottom: 1.5rem; color: #94a3b8;">Идеально для активных пользователей</p>
+          <p style="margin-bottom: 1rem; color: #94a3b8; font-size: 0.9rem;">Идеально для активных пользователей</p>
           
           <ul class="plan-features">
             <li>Нет рекламы</li>
@@ -817,17 +811,15 @@
             <li>Приоритетная поддержка</li>
           </ul>
           
-          <div class="plan-price">149₽ <span style="font-size: 1rem;">/мес</span></div>
+          <div class="plan-price">149₽ <span style="font-size: 0.9rem;">/мес</span></div>
           <div class="plan-period">Или 849₽ за год (экономия 30%)</div>
-          
-          <button class="btn btn-primary" style="width: 100%;"><i class="fas fa-shopping-cart"></i> Выбрать PRO</button>
         </div>
         
         <!-- PRO+ план -->
         <div class="plan-card pro-plus" id="pro-plus-plan">
           <div class="plan-badge">ПРЕМИУМ</div>
           <h3 class="plan-header">PRO+</h3>
-          <p style="margin-bottom: 1.5rem; color: #94a3b8;">Максимальные возможности для профессионалов</p>
+          <p style="margin-bottom: 1rem; color: #94a3b8; font-size: 0.9rem;">Максимальные возможности для профессионалов</p>
           
           <ul class="plan-features">
             <li>Все функции PRO</li>
@@ -839,16 +831,14 @@
             <li>Ранний доступ к новым функциям</li>
           </ul>
           
-          <div class="plan-price">249₽ <span style="font-size: 1rem;">/мес</span></div>
+          <div class="plan-price">249₽ <span style="font-size: 0.9rem;">/мес</span></div>
           <div class="plan-period">Или 1049₽ за год (экономия 45%)</div>
-          
-          <button class="btn btn-primary" style="width: 100%; background: var(--gradient-pro-plus);"><i class="fas fa-crown"></i> Выбрать PRO+</button>
         </div>
       </div>
       
-      <div style="background: rgba(30, 41, 59, 0.8); padding: 1.5rem; border-radius: var(--radius); margin-top: 2rem; border: 1px solid rgba(255, 255, 255, 0.1);">
-        <p style="margin-bottom: 0.5rem;"><i class="fas fa-info-circle"></i> Примечания к тарифам:</p>
-        <ul style="margin: 0; padding-left: 1.2rem; color: #94a3b8;">
+      <div style="background: rgba(30, 41, 59, 0.8); padding: 1.2rem; border-radius: var(--radius); margin-top: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.05);">
+        <p style="margin-bottom: 0.5rem; font-size: 0.9rem;"><i class="fas fa-info-circle"></i> Примечания к тарифам:</p>
+        <ul style="margin: 0; padding-left: 1rem; color: #94a3b8; font-size: 0.85rem;">
           <li>* — при поиске Ваши объявления будут находиться сверху.</li>
           <li>** — раз в неделю Вы можете бесплатно рекламировать что угодно в нашем боте.</li>
           <li>*** — все Ваши объявления будут навязчиво присланы некоторым пользователям.</li>
@@ -857,32 +847,32 @@
     </section>
     
     <!-- Поддержка -->
-    <section id="поддержка" class="section-card fade-in" style="max-width: 800px; margin: 4rem auto;">
+    <section id="поддержка" class="section-card fade-in" style="max-width: 700px; margin: 3rem auto;">
       <div class="section-icon">
         <i class="fas fa-headset"></i>
       </div>
       <h2>Поддержка</h2>
-      <p style="margin-bottom: 1.5rem;">Мы всегда готовы помочь вам с любыми вопросами. Свяжитесь с нашей поддержкой через бота.</p>
+      <p style="margin-bottom: 1rem;">Мы всегда готовы помочь вам с любыми вопросами. Свяжитесь с нашей поддержкой через бота.</p>
       
-      <div class="path" style="margin-bottom: 1.5rem;">Меню → Настройки → Обратная связь</div>
+      <div class="path" style="margin-bottom: 1rem;">Меню → Настройки → Обратная связь</div>
       
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
-        <div style="text-align: center; padding: 1.5rem; background: rgba(124, 58, 237, 0.1); border-radius: 10px;">
-          <div style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary);"><i class="fas fa-clock"></i></div>
-          <div style="font-weight: 600;">Быстрый ответ</div>
-          <div style="font-size: 0.9rem; color: #94a3b8;">Среднее время ответа: 15 мин</div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.8rem; margin-top: 1.5rem;">
+        <div style="text-align: center; padding: 1.2rem; background: rgba(124, 58, 237, 0.08); border-radius: 8px;">
+          <div style="font-size: 1.5rem; margin-bottom: 0.4rem; color: var(--primary);"><i class="fas fa-clock"></i></div>
+          <div style="font-weight: 600; font-size: 0.9rem;">Быстрый ответ</div>
+          <div style="font-size: 0.8rem; color: #94a3b8;">Среднее время ответа: 15 мин</div>
         </div>
         
-        <div style="text-align: center; padding: 1.5rem; background: rgba(6, 182, 212, 0.1); border-radius: 10px;">
-          <div style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--secondary);"><i class="fas fa-shield-alt"></i></div>
-          <div style="font-weight: 600;">Безопасность</div>
-          <div style="font-size: 0.9rem; color: #94a3b8;">Все обращения конфиденциальны</div>
+        <div style="text-align: center; padding: 1.2rem; background: rgba(6, 182, 212, 0.08); border-radius: 8px;">
+          <div style="font-size: 1.5rem; margin-bottom: 0.4rem; color: var(--secondary);"><i class="fas fa-shield-alt"></i></div>
+          <div style="font-weight: 600; font-size: 0.9rem;">Безопасность</div>
+          <div style="font-size: 0.8rem; color: #94a3b8;">Все обращения конфиденциальны</div>
         </div>
         
-        <div style="text-align: center; padding: 1.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
-          <div style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--success);"><i class="fas fa-users"></i></div>
-          <div style="font-weight: 600;">Команда экспертов</div>
-          <div style="font-size: 0.9rem; color: #94a3b8;">Опытные специалисты</div>
+        <div style="text-align: center; padding: 1.2rem; background: rgba(16, 185, 129, 0.08); border-radius: 8px;">
+          <div style="font-size: 1.5rem; margin-bottom: 0.4rem; color: var(--success);"><i class="fas fa-users"></i></div>
+          <div style="font-weight: 600; font-size: 0.9rem;">Команда экспертов</div>
+          <div style="font-size: 0.8rem; color: #94a3b8;">Опытные специалисты</div>
         </div>
       </div>
     </section>
@@ -896,16 +886,16 @@
           <i class="fas fa-shield-alt" style="color: var(--primary);"></i>
           Trade Master
         </div>
-        <p style="color: #94a3b8; margin-bottom: 1.5rem;">Безопасные сделки, которым можно доверять. Самый продвинутый бот для трейдов и продаж.</p>
-        <div style="display: flex; gap: 1rem;">
-          <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="fab fa-telegram"></i></a>
-          <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="fab fa-discord"></i></a>
-          <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+        <p style="color: #94a3b8; margin-bottom: 1rem; font-size: 0.9rem;">Безопасные сделки, которым можно доверять. Самый продвинутый бот для трейдов и продаж.</p>
+        <div style="display: flex; gap: 0.8rem;">
+          <a href="#" style="color: #94a3b8; font-size: 1rem;"><i class="fab fa-telegram"></i></a>
+          <a href="#" style="color: #94a3b8; font-size: 1rem;"><i class="fab fa-discord"></i></a>
+          <a href="#" style="color: #94a3b8; font-size: 1rem;"><i class="fab fa-twitter"></i></a>
         </div>
       </div>
       
       <div>
-        <h3 style="color: white; margin-bottom: 1.5rem; font-family: 'Poppins', sans-serif;">Навигация</h3>
+        <h3 style="color: white; margin-bottom: 1rem; font-family: 'Poppins', sans-serif; font-size: 1rem;">Навигация</h3>
         <div class="footer-links">
           <a href="#о-нас">О нас</a>
           <a href="#объявления-о-трейдах">Трейды</a>
@@ -916,13 +906,12 @@
       </div>
       
       <div>
-        <h3 style="color: white; margin-bottom: 1.5rem; font-family: 'Poppins', sans-serif;">Полезное</h3>
+        <h3 style="color: white; margin-bottom: 1rem; font-family: 'Poppins', sans-serif; font-size: 1rem;">Полезное</h3>
         <div class="footer-links">
           <a href="#профиль">Настройка профиля</a>
           <a href="#рефералы">Реферальная система</a>
           <a href="#сделки">Безопасные сделки</a>
           <a href="#правила">Правила использования</a>
-          <a href="#">Частые вопросы</a>
         </div>
       </div>
     </div>
@@ -936,18 +925,18 @@
     // Создание фоновых частиц
     function createParticles() {
       const container = document.getElementById('bg-particles');
-      const particleCount = 30;
+      const particleCount = 20;
       
       for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.classList.add('particle');
         
-        const size = Math.random() * 100 + 50;
+        const size = Math.random() * 80 + 40;
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
         particle.style.left = `${Math.random() * 100}%`;
         particle.style.top = `${Math.random() * 100}%`;
-        particle.style.background = `radial-gradient(circle, rgba(124, 58, 237, ${Math.random() * 0.1}) 0%, transparent 70%)`;
+        particle.style.background = `radial-gradient(circle, rgba(124, 58, 237, ${Math.random() * 0.08}) 0%, transparent 70%)`;
         particle.style.animationDuration = `${Math.random() * 30 + 20}s`;
         particle.style.animationDelay = `${Math.random() * 5}s`;
         
@@ -955,7 +944,7 @@
       }
       
       // Создание сверкающих точек
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 15; i++) {
         const sparkle = document.createElement('div');
         sparkle.classList.add('sparkle');
         sparkle.style.left = `${Math.random() * 100}%`;
@@ -969,23 +958,23 @@
     function createConfetti(container) {
       const colors = ['#7c3aed', '#06b6d4', '#f59e0b', '#10b981', '#ef4444'];
       
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 20; i++) {
         const confetti = document.createElement('div');
         confetti.classList.add('confetti');
         confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.width = `${Math.random() * 10 + 5}px`;
-        confetti.style.height = `${Math.random() * 10 + 5}px`;
+        confetti.style.width = `${Math.random() * 8 + 4}px`;
+        confetti.style.height = `${Math.random() * 8 + 4}px`;
         confetti.style.left = `${Math.random() * 100}%`;
         confetti.style.top = `${Math.random() * 100}%`;
         confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
         
         // Анимация
         const animation = confetti.animate([
-          { transform: 'translateY(-100px) rotate(0deg)', opacity: 1 },
-          { transform: `translateY(${container.clientHeight + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+          { transform: 'translateY(-80px) rotate(0deg)', opacity: 1 },
+          { transform: `translateY(${container.clientHeight + 80}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
         ], {
-          duration: Math.random() * 3000 + 2000,
-          delay: Math.random() * 1000,
+          duration: Math.random() * 2500 + 1500,
+          delay: Math.random() * 800,
           easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
         });
         
@@ -1012,54 +1001,13 @@
       createConfetti(this);
     });
     
-    // Анимация для кнопки подключения
-    document.getElementById('connectBtn').addEventListener('click', function(e) {
-      e.preventDefault();
-      this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Подключение...';
-      this.style.background = 'var(--gradient-gold)';
-      
-      setTimeout(() => {
-        this.innerHTML = '<i class="fas fa-check"></i> Подключено!';
-        this.style.background = 'var(--success)';
-        
-        setTimeout(() => {
-          this.innerHTML = '<i class="fas fa-robot"></i> Подключиться';
-          this.style.background = '';
-        }, 2000);
-      }, 1500);
-    });
-    
-    // Активация навигационных ссылок при прокрутке
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-    
+    // Показать/скрыть кнопку "наверх"
     window.addEventListener('scroll', () => {
-      let current = '';
-      
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (scrollY >= sectionTop - 200) {
-          current = section.getAttribute('id');
-        }
-      });
-      
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-          link.classList.add('active');
-        }
-      });
-      
-      // Показать/скрыть кнопку "наверх"
       const toTopBtn = document.getElementById('toTopBtn');
-      if (window.scrollY > 500) {
-        toTopBtn.style.opacity = '1';
-        toTopBtn.style.visibility = 'visible';
+      if (window.scrollY > 400) {
+        toTopBtn.classList.add('visible');
       } else {
-        toTopBtn.style.opacity = '0';
-        toTopBtn.style.visibility = 'hidden';
+        toTopBtn.classList.remove('visible');
       }
     });
     
@@ -1073,7 +1021,7 @@
         setTimeout(() => {
           el.style.opacity = '1';
           el.style.transform = 'translateY(0)';
-        }, index * 100);
+        }, index * 80);
       });
       
       // Имитация снежинок на PRO карточках
